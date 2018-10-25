@@ -1,5 +1,4 @@
 function x = determinant(a)
-%GAUSS_ELIM Summary of this function goes here
 M = a;
 n = size(a);
 n = n(1);
