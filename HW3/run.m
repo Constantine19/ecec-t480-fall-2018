@@ -109,6 +109,9 @@ b = [3890; 95; 282];
 display(gauss_elim(a, b))
 
 %% Problem 5
+clear all
+clc
+
 fprintf('\nUsed mesh analysis to come up with the system: \n')
 a = [-25 0 -4 29; 11 -4 0 -5; -4 9 -5 0; 0 -25 37 -4];
 b = [10;0;2;0];
