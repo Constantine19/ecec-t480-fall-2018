@@ -21,8 +21,8 @@ clear all
 clc
 syms f(x, y)
 f(x, y) = (x-3)^2 + (y-2)^2;
-fx = @(x) 2*x - 6;
-fy = @(y) 2*y - 4;
+fx = @(x, y) 2*x - 6;
+fy = @(x, y) 2*y - 4;
 fprintf('\n optim random approach: \n')
 optim_random(f, 1, 10)
 gradient = optim_gradient(fx, fy, 1, 1);
@@ -35,10 +35,17 @@ clc
 syms f(x, y)
 f(x, y) = 4*x + 2*y + x^2 - 2*x^4 + 2*x*y - 3*y^2;
 
-fx = @(x) - 8*x^3 + 2*x + 2*y + 4;
-fy = @(y) 2*x - 6*y + 2;
+fx = @(x, y) - 8*x^3 + 2*x + 2*y + 4;
+fy = @(x, y) 2*x - 6*y + 2;
 fprintf('\n optim random approach: \n')
 optim_random(f, 1, 10)
 gradient = optim_gradient(fx, fy, 0, 0);
 fprintf('\n optim steepest ascent approach: \n')
 [location, max] = optim_steepest_ascent(f, gradient, .001, 3, 0.001)
+%% Problem 5
+clear all
+clc
+syms f(x, y)
+f(x, y) = -8* x + x^2 + 12*y + 4*y^2 - 2*x*y
+%fx = @(x, y) - 8*x^3 + 2*x + 2*y + 4;
+%fy = @(x, y) 2*x - 6*y + 2;

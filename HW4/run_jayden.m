@@ -42,3 +42,16 @@ optim_random(f, 1, 10)
 gradient = optim_gradient(fx, fy, 0, 0);
 fprintf('\n optim steepest ascent approach: \n')
 [location, max] = optim_steepest_ascent(f, gradient, .001, 3, 0.001)
+%% Problem 5
+clear all
+clc
+syms f(x, y)
+f(x, y) = -8* x + x^2 + 12*y + 4*y^2 - 2*x*y;
+fx = @(x, y) 2*x - 2*y - 8;
+fy = @(x, y) 8*y - 2*x + 12;
+
+fprintf('\n optim random approach: \n')
+optim_random(f, 1, 10)
+gradient = optim_gradient(fx, fy, 0, 0);
+fprintf('\n optim steepest ascent approach: \n')
+[location, max] = optim_steepest_ascent(f, gradient, .001, 3, 0.001)
