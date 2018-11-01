@@ -1,0 +1,407 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>run</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-10-25"><meta name="DC.source" content="run.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">Problem 2</a></li><li><a href="#4">Problem 3</a></li><li><a href="#5">Problem 4</a></li><li><a href="#6">Problem 5</a></li></ul></div><pre class="codeinput"><span class="comment">% Konstantin Zelmanovich</span>
+<span class="comment">% Jayden Chen</span>
+<span class="comment">% ECEC-T480 Homework 3</span>
+</pre><p>Problem 1</p><pre class="codeinput">clear <span class="string">all</span>
+clc
+<span class="comment">% Part a</span>
+fprintf(<span class="string">'\nComputing the determinant: \n'</span>)
+matrix = [0 -3 7 2; 1 2 -1 3; 5 -2 0 2];
+display(determinant(matrix))
+
+<span class="comment">% Part b</span>
+fprintf(<span class="string">'\nUsing Cramers rule: \n'</span>)
+D = [0 -3 7; 1 2 -1; 5 -2 0];
+Dx = [2 -3 7; 3 2 -1; 2 -2 0];
+Dy = [0 2 7; 1 3 -1; 5 2 0];
+Dz = [0 -3 2; 1 2 3; 5 -2 2];
+
+x = determinant(Dx)/determinant(D)
+y = determinant(Dy)/determinant(D)
+z = determinant(Dz)/determinant(D)
+
+<span class="comment">% Part c</span>
+fprintf(<span class="string">'\nUsing Gauss elimination: \n'</span>)
+a = [0 -3 7; 1 2 -1; 5 -2 0];
+b = [2; 3; 2];
+display(gauss_elim(a, b))
+
+<span class="comment">% Part d</span>
+fprintf(<span class="string">'\nUsing Gaus-Jordan method: \n'</span>)
+a = [0 -3 7; 1 2 -1; 5 -2 0];
+b = [2; 3; 2];
+display(gauss_jordan(a, b))
+
+<span class="comment">% Part e</span>
+fprintf(<span class="string">'\nUsing Gaus-Seidel method: \n'</span>)
+A = [0 -3 7; 1 2 -1; 5 -2 0];
+b = [2; 3; 2];
+display(gauss_seidel(A,b, 0.8, 10000))
+
+<span class="comment">% Part f</span>
+fprintf(<span class="string">'\nUsing matinv and mmult: \n'</span>)
+matrix = [0 -3 7; 1 2 -1 ; 5 -2 0 ];
+b = [2; 3; 2];
+display(mmult(matinv(matrix), b))
+</pre><pre class="codeoutput">
+Computing the determinant: 
+   -69
+
+
+Using Cramers rule: 
+
+x =
+
+   -0.9855
+
+
+y =
+
+   -1.4638
+
+
+z =
+
+    0.9130
+
+
+Using Gauss elimination: 
+    0.9855
+    1.4638
+    0.9130
+
+
+Using Gaus-Jordan method: 
+    0.9855
+    1.4638
+    0.9130
+
+
+Using Gaus-Seidel method: 
+   NaN   NaN   NaN
+
+
+Using matinv and mmult: 
+    0.9855
+    1.4638
+    0.9130
+
+</pre><h2 id="3">Problem 2</h2><pre class="codeinput">clear <span class="string">all</span>
+clc
+<span class="comment">% Part a</span>
+fprintf(<span class="string">'\nComputing the determinant: \n'</span>)
+matrix = [3 -2 1 -10; 2 6 4 44; -1 -2 5 -26];
+display(determinant(matrix))
+
+<span class="comment">% Part b</span>
+fprintf(<span class="string">'\nUsing Cramers rule: \n'</span>)
+D = [3 -2 1; 2 6 4; -1 -2 5];
+Dx = [-10 -2 1; 44 6 4; -26 -2 5];
+Dy = [3 -10 1; 2 44 4; -1 -26 5];
+Dz = [3 -2 -10; 2 6 44; -1 -2 -26];
+
+x = determinant(Dx)/determinant(D)
+y = determinant(Dy)/determinant(D)
+z = determinant(Dz)/determinant(D)
+
+<span class="comment">% Part c</span>
+fprintf(<span class="string">'\nUsing Gauss elimination: \n'</span>)
+a = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(gauss_elim(a, b))
+
+<span class="comment">% Part d</span>
+fprintf(<span class="string">'\nUsing Gaus-Jordan method: \n'</span>)
+a = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(gauss_jordan(a, b))
+
+<span class="comment">% Part e</span>
+fprintf(<span class="string">'\nUsing Gaus-Seidel method: \n'</span>)
+A = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(gauss_seidel(A,b, 0.8, 1000))
+
+<span class="comment">% Part f</span>
+fprintf(<span class="string">'\nUsing matinv and mmult: \n'</span>)
+matrix = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(mmult(matinv(matrix), b))
+</pre><pre class="codeoutput">
+Computing the determinant: 
+   144
+
+
+Using Cramers rule: 
+
+x =
+
+    2.3333
+
+
+y =
+
+    7.6667
+
+
+z =
+
+   -1.6667
+
+
+Using Gauss elimination: 
+    2.3333
+    7.6667
+   -1.6667
+
+
+Using Gaus-Jordan method: 
+    2.3333
+    7.6667
+   -1.6667
+
+
+Using Gaus-Seidel method: 
+    2.3329    7.6664   -1.6669
+
+
+Using matinv and mmult: 
+    2.3333
+    7.6667
+   -1.6667
+
+</pre><h2 id="4">Problem 3</h2><pre class="codeinput">clear <span class="string">all</span>
+clc
+
+fprintf(<span class="string">'\nUsing LU decomposition: \n'</span>)
+matrix = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+[L, U] = lu_decomp(matrix);
+xx = U\(L\b)
+</pre><pre class="codeoutput">
+Using LU decomposition: 
+
+xx =
+
+    2.3333
+    7.6667
+   -1.6667
+
+</pre><h2 id="5">Problem 4</h2><pre class="codeinput">clear <span class="string">all</span>
+clc
+
+fprintf(<span class="string">'\nElectrical engineer problem: \n'</span>)
+a = [15 17 19; 0.3 0.4 0.55; 1 1.2 1.5];
+b = [3890; 95; 282];
+display(gauss_elim(a, b))
+</pre><pre class="codeoutput">
+Electrical engineer problem: 
+   90.0000
+   60.0000
+   80.0000
+
+</pre><h2 id="6">Problem 5</h2><pre class="codeinput">clear <span class="string">all</span>
+clc
+
+fprintf(<span class="string">'\nUsed mesh analysis to come up with the system: \n'</span>)
+a = [-25 0 -4 29; 11 -4 0 -5; -4 9 -5 0; 0 -25 37 -4];
+b = [10;0;2;0];
+display(gauss_elim(a, b))
+</pre><pre class="codeoutput">
+Used mesh analysis to come up with the system: 
+    1.1568
+    1.3219
+    1.0540
+    1.4875
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Konstantin Zelmanovich
+% Jayden Chen
+% ECEC-T480 Homework 3
+
+%%
+% Problem 1
+clear all
+clc
+% Part a
+fprintf('\nComputing the determinant: \n')
+matrix = [0 -3 7 2; 1 2 -1 3; 5 -2 0 2];
+display(determinant(matrix))
+
+% Part b
+fprintf('\nUsing Cramers rule: \n')
+D = [0 -3 7; 1 2 -1; 5 -2 0];
+Dx = [2 -3 7; 3 2 -1; 2 -2 0];
+Dy = [0 2 7; 1 3 -1; 5 2 0];
+Dz = [0 -3 2; 1 2 3; 5 -2 2];
+
+x = determinant(Dx)/determinant(D)
+y = determinant(Dy)/determinant(D)
+z = determinant(Dz)/determinant(D)
+
+% Part c
+fprintf('\nUsing Gauss elimination: \n')
+a = [0 -3 7; 1 2 -1; 5 -2 0];
+b = [2; 3; 2];
+display(gauss_elim(a, b))
+
+% Part d
+fprintf('\nUsing Gaus-Jordan method: \n')
+a = [0 -3 7; 1 2 -1; 5 -2 0];
+b = [2; 3; 2];
+display(gauss_jordan(a, b))
+
+% Part e
+fprintf('\nUsing Gaus-Seidel method: \n')
+A = [0 -3 7; 1 2 -1; 5 -2 0];
+b = [2; 3; 2];
+display(gauss_seidel(A,b, 0.8, 10000))
+
+% Part f
+fprintf('\nUsing matinv and mmult: \n')
+matrix = [0 -3 7; 1 2 -1 ; 5 -2 0 ];
+b = [2; 3; 2];
+display(mmult(matinv(matrix), b))
+
+%% Problem 2
+clear all
+clc
+% Part a
+fprintf('\nComputing the determinant: \n')
+matrix = [3 -2 1 -10; 2 6 4 44; -1 -2 5 -26];
+display(determinant(matrix))
+
+% Part b
+fprintf('\nUsing Cramers rule: \n')
+D = [3 -2 1; 2 6 4; -1 -2 5];
+Dx = [-10 -2 1; 44 6 4; -26 -2 5];
+Dy = [3 -10 1; 2 44 4; -1 -26 5];
+Dz = [3 -2 -10; 2 6 44; -1 -2 -26];
+
+x = determinant(Dx)/determinant(D)
+y = determinant(Dy)/determinant(D)
+z = determinant(Dz)/determinant(D)
+
+% Part c
+fprintf('\nUsing Gauss elimination: \n')
+a = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(gauss_elim(a, b))
+
+% Part d
+fprintf('\nUsing Gaus-Jordan method: \n')
+a = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(gauss_jordan(a, b))
+
+% Part e
+fprintf('\nUsing Gaus-Seidel method: \n')
+A = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(gauss_seidel(A,b, 0.8, 1000))
+
+% Part f
+fprintf('\nUsing matinv and mmult: \n')
+matrix = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+display(mmult(matinv(matrix), b))
+
+%% Problem 3
+clear all
+clc
+
+fprintf('\nUsing LU decomposition: \n')
+matrix = [3 -2 1; 2 6 4; -1 -2 5];
+b = [-10; 44; -26];
+[L, U] = lu_decomp(matrix);
+xx = U\(L\b)
+
+%% Problem 4
+clear all
+clc
+
+fprintf('\nElectrical engineer problem: \n')
+a = [15 17 19; 0.3 0.4 0.55; 1 1.2 1.5];
+b = [3890; 95; 282];
+display(gauss_elim(a, b))
+
+%% Problem 5
+clear all
+clc
+
+fprintf('\nUsed mesh analysis to come up with the system: \n')
+a = [-25 0 -4 29; 11 -4 0 -5; -4 9 -5 0; 0 -25 37 -4];
+b = [10;0;2;0];
+display(gauss_elim(a, b))
+
+
+##### SOURCE END #####
+--></body></html>
