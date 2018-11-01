@@ -22,8 +22,8 @@ for ii = 0:max_iter
     end
 end
 
-output = [output; x3, func(x3)];
-fprintf('Maximum | Maximum Value')
-fprintf('\n%f %f\n',output.')
+output = [output; x3, func(x3)]
+%fprintf('Maximum | Maximum Value')
+%fprintf('\n%f %f\n',output.')
 
 end

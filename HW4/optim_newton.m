@@ -15,6 +15,6 @@ function initial_guess = optim_newton(func , dfunc, initial_guess, upper, max_er
         error = abs((initial_guess - initial_guess_old)/initial_guess)*100;
     end
     output_array = [output_array; i, initial_guess, func(initial_guess), error];
-    fprintf('\n%d %f %f %f\n', output_array.')
+    %fprintf('\n%d %f %f %f\n', output_array.')
 
 end

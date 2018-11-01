@@ -1,3 +1,7 @@
+% Kontantin Zelmanovich
+% Jayden Chen
+% Homework 4
+
 %% problem 1
 clear all
 clc
@@ -15,6 +19,14 @@ fprintf('\n optim newton approach: \n')
 optim_newton(f , df, 1, 50, 0.001 , 10)
 fprintf('\n optim random approach: \n')
 optim_random_1d(f, 50, 15)
+
+%% Problem 2
+clear all
+clc
+f= @(s) -(15*(s-s.^22)/((1-s)*(4*s.^2-s*3+4)));
+%g= @(s) T(-s)* -1;
+fprintf('\n optim golden approach: \n')
+optim_golden(f, 0, 100, 0.001, 10)
 
 %% Problem 4
 clear all
@@ -42,7 +54,7 @@ optim_random(f, 1, 10)
 gradient = optim_gradient(fx, fy, 0, 0);
 fprintf('\n optim steepest ascent approach: \n')
 [location, max] = optim_steepest_ascent(f, gradient, .001, 3, 0.001)
-%% Problem 5
+%% Problem 6
 clear all
 clc
 syms f(x, y)

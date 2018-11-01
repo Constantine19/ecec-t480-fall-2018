@@ -17,6 +17,8 @@ for i=0:max_iter
     end
 end
 output = [output; best, func(best)];
-fprintf('Maximum | Maximum Value')
-fprintf('\n%f %f\n',output.')
+display(best)
+
+%fprintf('Maximum | Maximum Value')
+%fprintf('\n%f %f\n',output.')
 end
