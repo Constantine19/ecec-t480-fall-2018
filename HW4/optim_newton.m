@@ -1,4 +1,4 @@
-function initial_guess = optim_newtown(func , dfunc, initial_guess, max_iteration, max_error)
+function initial_guess = optim_newton(func , dfunc, initial_guess, max_iteration, max_error)
 %   Finds the root of a function using the Newton-Rhapson approach.
 %   Inputs are the function(anonymous),the derivative of the function(anonymous),
 %   initial guess, maximum number of iterations, and maximum absolute relative error.
