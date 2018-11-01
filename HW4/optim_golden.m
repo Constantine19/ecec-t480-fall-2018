@@ -1,7 +1,5 @@
 function [x, fx, ea, iter] = optim_golden(f, x1, xu, es, maxit, varargin)
 
-if nargin<4||isempty(res), es=0.0001;end
-if nargin<5||isempty(maxit), maxit=50;end
 phi = (1+sqrt(5))/2;
 iter = 0;
 while(1)

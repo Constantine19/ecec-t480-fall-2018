@@ -5,18 +5,17 @@ function y = optim_random(func, bond, max_iter)
 % The outputs are the location of the maximum and the maximum value.
 
 dim=2;
-popsize=100;
+popsize=10;
 max_error=0.01;
 output =[];
 for i=0:max_iter
     candidate=10*rand(dim,popsize)-bond;
-    best=min(feval(func,candidate));
-    output = [output; best, func(best)];
+    best=min(feval(func,candidate, candidate));
     if best <= max_error
         break;
     end
 end
-output = [output; best, func(best)];
+output = [output; best, func(best, best)];
 fprintf('Maximum | Maximum Value')
 fprintf('\n%f %f\n',output.')
 end

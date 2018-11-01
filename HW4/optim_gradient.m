@@ -1,10 +1,5 @@
-function [grad] = optim_gradient(df, x)
-n = size(df);
-grad = zeros(n(1), 1);
-
-for i = 1:n(1)
-    f = df(i);
-    grad(i) = f(x(i));
-end
-
+function [grad] = optim_gradient(dx, dy, x1, y1)
+grad = zeros(1, 2);
+grad(1, 1) = dx(x1, y1);
+grad(1, 2) = dy(x1, y1);
 end
