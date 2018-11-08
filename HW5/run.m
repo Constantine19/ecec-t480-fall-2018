@@ -6,6 +6,12 @@ V = [-0.45, -0.6, 0.70, 1.88, 6.0];
 z = [i;V]';
 [a, r2] = cf_polyfit(z,3)
 
+best_fit = a(1)*i.^3+a(2)*i.^2+a(3)*i+a(4)
+figure
+plot(i,V)
+hold on
+plot(i,best_fit)
+
 %% Problem 2
 clc
 clear all
@@ -13,6 +19,12 @@ x = [1, 2, 4, 6, 8, 10];
 y = [5.5, 12.5, 17.5, 32, 38, 49];
 z = [x;y]';
 [a, r2] = cf_polyfit(z,3)
+
+best_fit = a(1)*x.^3+a(2)*x.^2+a(3)*x+a(4)
+figure
+plot(x,y)
+hold on
+plot(x,best_fit)
 
 %% Problem 3
 clc
@@ -22,6 +34,12 @@ p = [100, 200, 450, 950, 2000];
 z = [t;p]';
 [a, r2] = cf_polyfit(z,3)
 
+best_fit = a(1)*t.^3+a(2)*t.^2+a(3)*t+a(4)
+figure
+plot(t,p)
+hold on
+plot(t,best_fit)
+
 %% Problem 4
 clc
 clear all
@@ -29,6 +47,12 @@ x = [ 0, 2, 4, 6, 9, 11, 12, 15, 17, 19];
 y = [5, 6, 7, 6, 9, 8, 7, 10, 12, 12]; 
 z = [x;y]';
 [a, r2] = cf_polyfit(z,5)
+
+best_fit = a(1)*x.^3+a(2)*x.^2+a(3)*x+a(4)
+figure
+plot(x,y)
+hold on
+plot(x,best_fit)
 
 %% Problem 5
 clear all
@@ -58,14 +82,13 @@ clc
 x = [0.75, 2, 3, 4, 6, 8, 8.5];
 y = [1.2, 1.95, 2, 2.4, 2.4, 2.7, 2.6];
 z = [x;y]';
-hold on
-x = 0:.5:10;
-plot(z(:, 1),z(:, 2), 'o');
 [a, r2] = cf_polyfit(z,5);
-y = 10.^(log10(a) + a*log10(x));
-plot(x, y)
 
-
+best_fit = a(1)*x.^3+a(2)*x.^2+a(3)*x+a(4)
+figure
+plot(x,y)
+hold on
+plot(x,best_fit)
 
 %% Problem 6
 clear all
