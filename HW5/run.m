@@ -46,7 +46,7 @@ clear all
 x = [ 0, 2, 4, 6, 9, 11, 12, 15, 17, 19];
 y = [5, 6, 7, 6, 9, 8, 7, 10, 12, 12]; 
 z = [x;y]';
-[a, r2] = cf_polyfit(z,5)
+[a, r2] = cf_polyfit(z,3)
 
 best_fit = a(1)*x.^3+a(2)*x.^2+a(3)*x+a(4)
 figure
@@ -82,7 +82,7 @@ clc
 x = [0.75, 2, 3, 4, 6, 8, 8.5];
 y = [1.2, 1.95, 2, 2.4, 2.4, 2.7, 2.6];
 z = [x;y]';
-[a, r2] = cf_polyfit(z,5);
+[a, r2] = cf_polyfit(z,3);
 
 best_fit = a(1)*x.^3+a(2)*x.^2+a(3)*x+a(4)
 figure
@@ -167,6 +167,21 @@ y = 1./((1./a0) + a1./(a0*x));
 plot(x, y)
 
 legend('data', 'linear', 'power', 'saturation')
+
+%% Problem 8 (poly part)
+clear all
+clc
+x = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+y = [17, 24, 31, 33, 37, 37, 40, 40, 42, 41];
+z = [x;y]';
+[a, r2] = cf_polyfit(z,3);
+
+best_fit = a(1)*x.^3+a(2)*x.^2+a(3)*x+a(4)
+figure
+plot(x,y)
+hold on
+plot(x,best_fit)
+
 %% Problem 9
 clear all
 clc
