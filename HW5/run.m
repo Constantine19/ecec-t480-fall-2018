@@ -31,6 +31,41 @@ z = [x;y]';
 [a, r2] = cf_polyfit(z,5)
 
 %% Problem 5
+clear all
+clc
+clf
+ord = [.75 1.2;
+    2 1.95;
+    3 2;
+    4 2.4;
+    6 2.4;
+    8 2.7;
+    8.5 2.6];
+hold on
+x = 0:.5:10;
+plot(ord(:, 1),ord(:, 2), 'o');
+[a0, a1, r2] = cf_linear_lsr(ord, 'power');
+y = 10.^(log10(a0) + a1*log10(x));
+plot(x, y)
+[a0, a1, r2] = cf_linear_lsr(ord, 'saturation')
+y = 1./((1./a0) + a1./(a0*x));
+plot(x, y)
+
+
+%% Problem 5 (poly part)
+clear all
+clc
+x = [0.75, 2, 3, 4, 6, 8, 8.5];
+y = [1.2, 1.95, 2, 2.4, 2.4, 2.7, 2.6];
+z = [x;y]';
+hold on
+x = 0:.5:10;
+plot(z(:, 1),z(:, 2), 'o');
+[a, r2] = cf_polyfit(z,5);
+y = 10.^(log10(a) + a*log10(x));
+plot(x, y)
+
+
 
 %% Problem 6
 clear all
@@ -131,22 +166,4 @@ hold on
 plot(ord(:, 1),ord(:, 2), 'o');
 x = 0:5:60
 y = a0 * (x ./ (a1 + x))
-plot(x, y)
-%% test
-clear all
-clc
-clf
-ord = [ 0.25 0.28;
-      0.75 0.57;
-      1.25 0.68;
-      1.75 0.74;
-      2.25 0.79];
-fa0 = @(a0, a1, x) 1 - exp(-a1*x);
-fa1 = @(a0, a1, x) a0*x*exp(-a1*x);
-fx = @(a0, a1, x) a0*(1-exp(-a1*x));
-[a0, a1, r2] = cf_nonlinfit(ord, fx, {fa0 fa1})
-hold on
-plot(ord(:, 1),ord(:, 2), 'o');
-x = 0:.25:3
-y = a0*(1-exp(-a1*x))
 plot(x, y)
