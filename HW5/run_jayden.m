@@ -1,3 +1,25 @@
+%% Problem 5
+clear all
+clc
+clf
+ord = [.75 1.2;
+    2 1.95;
+    3 2;
+    4 2.4;
+    6 2.4;
+    8 2.7;
+    8.5 2.6];
+hold on
+x = 0:.5:10;
+plot(ord(:, 1),ord(:, 2), 'o');
+[a0, a1, r2] = cf_linear_lsr(ord, 'power');
+y = 10.^(log10(a0) + a1*log10(x));
+plot(x, y)
+[a0, a1, r2] = cf_linear_lsr(ord, 'saturation')
+y = 1./((1./a0) + a1./(a0*x));
+plot(x, y)
+
+legend("data", "power", "saturation")
 %% Problem 6
 clear all
 clc
