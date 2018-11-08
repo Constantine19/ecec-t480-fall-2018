@@ -1,3 +1,6 @@
+% Konstantin Zelmanovich
+% Jayden Chen
+
 %% Problem 1
 clc
 clear all
