@@ -1,3 +1,8 @@
+% Project 3
+% Konstantin Zelmanovich
+% Jayden Chen
+
+%% Project 3
 clc
 clear all
 clf 
@@ -49,7 +54,7 @@ plot(v30, i30)
 plot(v40, i40)
 plot(vce, ic)
 plot(intersect_v40, intersect_i40, 'o', intersect_v30, intersect_i30, 'o', intersect_v20, intersect_i20, 'o', intersect_v10, intersect_i10, 'o');
-legend("Ib = 10uA", "Ib = 20uA", "Ib = 30uA", "I = 40uA")
-xlabel("I collector (mA)");
-ylabel("V ce (V)");
+legend('Ib = 10uA', 'Ib = 20uA', 'Ib = 30uA', 'I = 40uA')
+xlabel('I collector (mA)');
+ylabel('V ce (V)');
 hold off
