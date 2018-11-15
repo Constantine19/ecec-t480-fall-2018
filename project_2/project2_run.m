@@ -3,8 +3,11 @@
 % Jayden Chen
 
 %% Project 2
-clear all; clc;
+clear all
+clc
 format long
+
+% Initial values
 L = 10;
 e = 0.25/1000;
 p = 1000;
@@ -16,31 +19,31 @@ RR1 = e/(D1);
 data = [];
 data1 = [];
 
-%need to find: mass flow rate, friction factor, reynolds #, head loss
-for D2 = 0.03:0.01:0.5  % Loop for each diameter of pipe 2
+% Mass flow rate, Friction factor, Reynolds number, Head loss
+for D2 = 0.03:0.01:0.5
     RR2 = e/D2;
     A2 = ((D2/2)^2)*pi();
     HL_Diff = 9999999999;
     m1_perm = 0;
-    for m = 0.01:0.01:5  %Loop for each mass flow rate
+    
+    for m = 0.01:0.01:5
         m1 = m;
         m2 = 5-m1;
 
-        %Mass flow rate
+        % Calculating Mass flow rate
         v1 = m1/(p*A1);
         v2 = m2/(p*A2);
 
-        %Reynolds
+        % Calculating Reynolds number
         Re1 = p*v1*D1/u;
         Re2 = p*v2*D2/u;
 
-        %Friction Factor
+        % Calculating Friction factor
         y1 = @(f) 1/sqrt(f) + 2*log10( (e/D1)/3.7 + 2.51/(Re1*sqrt(f)));
         dy1 = @(f) (sqrt(f) *(-0.5*RR1*Re1 - 4.03329) - 4.6435) / (RR1* f^2 * Re1 + 9.287*f^1.5);
-        %dy1 = @(f) (D1* (-9.287*sqrt(f) - 4.6435) - 0.5*e*Re1*sqrt(f)) / (0.287*+D1*f^1.5 + e*Re1*f^2);
+        
         y2 = @(f) 1/sqrt(f) + 2*log10( (e/D2)/3.7 + 2.51/(Re2*sqrt(f)));
         dy2 = @(f) (sqrt(f) *(-0.5*RR2*Re2 - 4.03329) - 4.6435) / (RR2* f^2 * Re2 + 9.287*f^1.5);
-        %dy2 = @(f) (D2* (-9.287*sqrt(f) - 4.6435) - 0.5*e*Re2*sqrt(f)) / (0.287*+D2*f^1.5 + e*Re2*f^2);
         
         fy1 = newton_rhapson(y1, dy1, 0.04, 10, 0.001);
         a = size(fy1);
@@ -49,7 +52,7 @@ for D2 = 0.03:0.01:0.5  % Loop for each diameter of pipe 2
         b = size(fy2);
         fy2_num = fy2(b(1),2);
         
-        %Head Loss
+        % Calculating Head Loss
         HL1 = fy1_num*L*(v1^2)/(D1*2*g);
         HL2 = fy2_num*L*(v2^2)/(D2*2*g);
         if abs(HL1-HL2) < HL_Diff
