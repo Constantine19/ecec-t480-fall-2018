@@ -23,10 +23,9 @@ m_steps = linspace(0,5,500);
 % Mass flow rate, Friction factor, Reynolds number, Head loss
 for j = 1:length(d_steps)
     D2 = d_steps(j);
-    RR2 = e/D2;
     A2 = ((D2/2)^2)*pi;
     HL1_Diff = intmax;
-    m1_perm = 0;
+    m1_accum = 0;
     for i = 1:length(m_steps)
         m1 = m_steps(i);
         m2 = 5-m1;
@@ -41,10 +40,11 @@ for j = 1:length(d_steps)
 
         % Calculating Friction factor
         y1 = @(f) 1 / sqrt(f) + 2*log10( (e/D1)/3.7 + 2.51/(Re1*sqrt(f)));
-        dy1 = @(f) (sqrt(f) *(-0.5*RR1*Re1 - 4.03329) - 4.6435) / (RR1* f^2 * Re1 + 9.287*f^1.5);
+        dy1 = @(f) (-.5/f^1.5) - (1.09*D1)/(f*(0.073467 * e*Re1*sqrt(f) + 2.51*D1));
         
         y2 = @(f) 1 / sqrt(f) + 2*log10( (e/D2)/3.7 + 2.51/(Re2*sqrt(f)));
-        dy2 = @(f) (sqrt(f) *(-0.5*RR2*Re2 - 4.03329) - 4.6435) / (RR2* f^2 * Re2 + 9.287*f^1.5);
+        dy2 = @(f) (-.5/f^1.5) - (1.09*D2)/(f*(0.073467 * e*Re2*sqrt(f) + 2.51*D2));
+                    
         
         fy1 = newton_rhapson(y1, dy1, 0.04, 5, 0.001);
         a = size(fy1);
@@ -57,20 +57,20 @@ for j = 1:length(d_steps)
         HL1 = fy1_num*L*(v1^2)/(D1*2*g);
         HL2 = fy2_num*L*(v2^2)/(D2*2*g);
         if abs(HL1-HL2) < HL1_Diff
-            m1_perm = m1;
-            m2_perm = m2;
-            HL1_perm = HL2;
-            HL2_perm = HL1;
+            m1_accum = m1;
+            m2_accum = m2;
+            HL1_accum = HL2;
+            HL2_accum = HL1;
             HL1_Diff = abs(HL1-HL2);
-            Re1_perm = Re2;
-            Re2_perm = Re1;
-            f1_perm = fy2_num;
-            f2_perm = fy1_num;
+            Re1_accum = Re2;
+            Re2_accum = Re1;
+            f1_accum = fy2_num;
+            f2_accum = fy1_num;
         end 
     end
     
-    data1 = [data1; D1 m1_perm f2_perm Re2_perm HL2_perm];
-    data2 = [data2;D2 m2_perm f1_perm Re1_perm HL1_perm];
+    data1 = [data1; D1 m1_accum f2_accum Re2_accum HL2_accum];
+    data2 = [data2;D2 m2_accum f1_accum Re1_accum HL1_accum];
 
 end
 figure(1)
