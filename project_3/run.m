@@ -39,22 +39,27 @@ ic = vcc/rc - (1/rc)*vce;
 for i = 1:length(v10)
     
 end
-intersect_v40 = 3.434;
-intersect_i40 = 8.283;
-intersect_v30 = 8.081;
-intersect_i30 = 5.96;
-intersect_v20 = 12.32;
-intersect_i20 = 3.838;
-intersect_v10 = 16.77;
-intersect_i10 = 1.616;
+i_v40 = 3.434;
+i_i40 = 8.283;
+i_v30 = 8.081;
+i_i30 = 5.96;
+i_v20 = 12.32;
+i_i20 = 3.838;
+i_v10 = 16.77;
+i_i10 = 1.616;
 hold on
 plot(v10, i10)
 plot(v20, i20)
 plot(v30, i30)
 plot(v40, i40)
 plot(vce, ic)
-plot(intersect_v40, intersect_i40, 'o', intersect_v30, intersect_i30, 'o', intersect_v20, intersect_i20, 'o', intersect_v10, intersect_i10, 'o');
+plot(i_v40, i_i40, 'o', i_v30, i_i30, 'o', i_v20, i_i20, 'o', i_v10, i_i10, 'o');
 legend('Ib = 10uA', 'Ib = 20uA', 'Ib = 30uA', 'I = 40uA')
 xlabel('I collector (mA)');
 ylabel('V ce (V)');
+text(i_v40, i_i40, "V = 3.434 I = 8.28 mA B = 206.87")
+text(i_v30, i_i30, 'V = 8.081 I = 5.96 mA B = 198.53')
+text(i_v20, i_i20, 'V = 12.32 I = 3.84 mA B = 191.75')
+text(i_v10, i_i10, 'V = 16.77 I = 1.62 mA B = 161.50')
+
 hold off

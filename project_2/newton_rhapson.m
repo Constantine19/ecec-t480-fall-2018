@@ -15,4 +15,3 @@ while err > maxerr && maxiter > iter
     err = abs((initial-initial_old)/initial)*100;
 end
 out = [out; iter, initial, f(initial) , err];
-
