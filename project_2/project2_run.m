@@ -40,22 +40,24 @@ for j = 1:length(d_steps)
         Re2 = p*v2*D2/u;
 
         % Calculating Friction factor
-        y1 = @(f) 1 / sqrt(f) + 2*log10( (e/D1)/3.7 + 2.51/(Re1*sqrt(f)));
-        dy1 = @(f) (sqrt(f) *(-0.5*RR1*Re1 - 4.03329) - 4.6435) / (RR1* f^2 * Re1 + 9.287*f^1.5);
+        y1 = @(f) 1/(f).^(1/2) + 2 * log10((e/D1)) * 3.7 + 2.51 / (Re1 * (f).^(1/2)));
+        dy1 = @(f) ((f).^(1/2) * ((-1/2) * RR1 * Re1 - 4.03329) - 4.6435) / (RR1 * f.^2 * Re1 + 9.287 * f.^(3/2));
         
-        y2 = @(f) 1 / sqrt(f) + 2*log10( (e/D2)/3.7 + 2.51/(Re2*sqrt(f)));
-        dy2 = @(f) (sqrt(f) *(-0.5*RR2*Re2 - 4.03329) - 4.6435) / (RR2* f^2 * Re2 + 9.287*f^1.5);
+        y2 = @(f) 1 / (f).^1/2 + 2 * log10((e/D2)/3.7 + 2.51/(Re2 * (f).^(1/2)));
+        dy2 = @(f) ((f).^1/2 * ((-1/2) * RR2 * Re2 - 4.03329) - 4.6435)/( RR2 * f.^2 * Re2 + 9.287 * f^(3/2));
         
         fy1 = newton_rhapson(y1, dy1, 0.04, 5, 0.001);
         a = size(fy1);
+        
         fy1_num = fy1(a(1),2);
         fy2 = newton_rhapson(y2, dy2, 0.04, 5, 0.001);
+        
         b = size(fy2);
         fy2_num = fy2(b(1),2);
         
         % Calculating Head Loss
-        HL1 = fy1_num*L*(v1^2)/(D1*2*g);
-        HL2 = fy2_num*L*(v2^2)/(D2*2*g);
+        HL1 = fy1_num * L * (v1.^2)/(D1 * 2 * g);
+        HL2 = fy2_num * L * (v2.^2)/(D2 * 2 * g);
         if abs(HL1-HL2) < HL1_Diff
             m1_perm = m1;
             m2_perm = m2;
